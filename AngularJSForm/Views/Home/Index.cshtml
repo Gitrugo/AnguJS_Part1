@@ -14,7 +14,7 @@
         <button ng-show="UjRogzVisible" ng-click="UjRogzit()" color="green">Új rögzítés</button>
     </div>
     <hr />
-    <form ng-submit="submitForm()" name="frmCustomer">
+    @*<form ng-submit="submitForm()" name="frmCustomer">
         <div>
             <label for="email">Ügyfél neve</label>
             <input type="text" ng-model="cust.CustName" name="cname" placeholder="Írd be az ügyfél nevét" required ng-minlength="4" ng-maxlength="19" size="100" />
@@ -33,36 +33,30 @@
             <input type="submit" value="Elküld" ng-disabled="myForm.$invalid" ng-hide="UjRogzVisible">
         </div>
 
-    </form>
+    </form>*@
 
+    <form action="/Home/UjVevo" method="post">
+        <div id="formContainer"></div>
+        <div id="validateSubmitButton"></div>
+   </form>
 
-    <div>
-        <div class="dx-field-label">Fontos ügyfél</div>
-        <div dx-check-box="checkBox.chkFontos"> </div>
+    @*<div>
+    <div class="dx-field-label">Fontos ügyfél</div>
+    <div dx-check-box="checkBox.chkFontos"> </div>
     </div>
     <div>
-        @*<div class="label">Megjegyzés</div>*@
         <div dx-text-box="textBox.simple"></div>
-     </div>
-        @*<div class="form">
-                <div class="dx-fieldset">
-                    <div class="dx-field">
-                        <div class="dx-field-label">Megjegyzés</div>
-                        <div class="dx-field-value">
-                            <div dx-text-box="textBox.simple"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>*@
+    </div>*@
 
+    <hr />
 
     <div>
         <div class="egyeb" dx-button="{ stylingMode: 'contained',
-    text: 'dx - Névjegy',
-    width: 120,
-    height: 30,
-    onClick: Nevjegy
-            }">
+text: 'dx - Névjegy',
+width: 120,
+height: 30,
+onClick: Nevjegy
+        }">
         </div>
         <label for="Nevjegy"></label>
         <label for="Nevjegy"></label>
@@ -115,19 +109,7 @@
         background-color: rgba(255, 222, 121, 0.96);
     }
 
-    .keret {
-        border: 1px solid black;
-        background-color: rgb(255, 244, 244);
-        height: 20px;
-    }
-    .keretChk {
-        border: 1px solid black;
-        background-color: rgb(255, 244, 244);
-        color: #fff;
-        width: 20px; 
-        height: 20px;
-    }
-
+ 
     .buttons-column > .column-header {
         flex-grow: 0;
         width: 150px;

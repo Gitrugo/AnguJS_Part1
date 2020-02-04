@@ -21,10 +21,12 @@ controller('CustomerController', function ($scope, $http, $location, $window) {
             bindingOptions: {
                 value: "cMegj"
             },
-            width: 300
+            width: 300,
+            showClearButton: true
         }
     };
 
+    var tbSzemSzin = ["Nincs","Kék", "Zöld", "Szürke", "Barna", "Egyéb"];
 
     //get called when user submits the form
     $scope.submitForm = function () {
@@ -89,10 +91,97 @@ controller('CustomerController', function ($scope, $http, $location, $window) {
         DevExpress.ui.notify("Üzenet jött a liftből.");
     }
 
-    //$scope.Bezar = function () {
-    //    $scope.message = '';
-    //    $window.close();
-    //}
+    $(function () {
+        $("#formContainer").dxForm({
+            formData: {
+                cNev: "",
+                dSzulDatum: new Date(0,0,1),    // 1900.01.01
+                nEletkor: 0,
+                bTanulo: false,
+                nSzemSzin: "",
+                nIskVegz: "",     
+                cMegjegyz: ""
+            },
+            items: [{
+                dataField: "cNev",
+                label: { text: "Név" },            
+                validationRules: [{
+                    type: "required",
+                    message: "Név megadása kötelező."
+                }, {
+                    type: "pattern",
+                    pattern: "^[a-zA-Z -]+$",
+                    message: "A név csak betűket tartalmazhat."
+                }]
+            }, {
+                dataField: "dSzulDatum",
+                label: { text: "Születési dátum" },
+                editorType: "dxDateBox"
+            }, {
+                dataField: "nEletkor",
+                label: { text: "Életkor (év)" },
+                editorType: "dxNumberBox",
+                editorOptions: { value: 0 }
+            }, {
+                dataField: "bTanulo",
+                label: { text: "Tanuló" },
+                editorType: "dxCheckBox",
+                editorOptions: { value: false }
+            }, {
+                dataField: "nSzemSzin",
+                label: { text: "Szeme színe" },
+                editorType: "dxRadioGroup",
+                editorOptions: {
+                    items: tbSzemSzin,
+                    value: tbSzemSzin[0],
+                    layout: "horizontal"
+                }
+            }, {
+                dataField: "nIskVegz",
+                label: { text: "Iskolai végzettség" },
+                editorType: "dxSelectBox",
+                editorOptions: { dataSource: [
+                    "8 általános",
+                    "Érettségi",
+                    "Főiskola",
+                    "Egyetem"
+                ],
+                placeholder: "Válaszd ki a megfelelő elemet..." }
+            }, {
+                dataField: "cMegjegyz",
+                label: { text: "Megjegyzés" },
+                editorType: "dxTextArea",
+                //helpText: "Egyéb rögzítendő információk.",
+                editorOptions: { placeholder: "Egyéb rögzítendő információk..." }
+            }, ],
+            validationGroup: "ValUjVevo"
+        });
+    });
+
+    $("#validateSubmitButton").dxButton({
+        // ...
+        text: "Adatok rögzítése",
+        type: "default",
+        stylingMode: "contained",
+        width: 180,
+        validationGroup: "ValUjVevo",
+        useSubmitBehavior: true
+    });
+    //{
+    //    itemType: "button",
+    //    buttonOptions: {
+    //        useSubmitBehavior: true
+    //    },
+        //onClick: function () {
+        //    DevExpress.ui.notify("Adatküldés folyamatban...");
+                
+        
+    $scope.submitDxForm = function () {
+        $scope.isViewLoading = true;
+        console.log('DxForm elküldve ezzel:', $scope.dxForm.formData);
+        $scope.isViewLoading = false;
+    }
+
 })
 .config(function ($locationProvider) {
 
