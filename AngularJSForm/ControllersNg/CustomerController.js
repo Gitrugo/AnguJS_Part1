@@ -6,21 +6,22 @@ controller('CustomerController', function ($scope, $http, $location, $window) {
     $scope.isViewLoading = false;
     $scope.UjRogzVisible = false;
     $scope.Fontos = true;
-    $scope.cNev = "Kacsa Kázmér";
+    $scope.cMegj = "Ha már homár";
     $scope.checkBox = {
         chkFontos: {
             bindingOptions: {
                 value: "Fontos"
             },
-        }
+            disabled: false,
+            activeStateEnabled: true
+}
     };
     $scope.textBox = {
         simple: {
             bindingOptions: {
-                value: "cNev"
+                value: "cMegj"
             },
-            showClearButton: true,
-            stylingMode: 'filled'
+            width: 300
         }
     };
 
@@ -30,7 +31,7 @@ controller('CustomerController', function ($scope, $http, $location, $window) {
         $scope.isViewLoading = true;
         console.log('Form elküldve ezzel:', $scope.cust);  
         console.log('checkBox.chkFontos:', $scope.Fontos); 
-        console.log('Textbox.simple:', $scope.cNev);  
+        console.log('Textbox.simple:', $scope.cMegj);
 
         //$http service that send or receive data from the remote server
         $http({

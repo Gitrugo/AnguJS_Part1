@@ -40,26 +40,29 @@
         <div class="dx-field-label">Fontos ügyfél</div>
         <div dx-check-box="checkBox.chkFontos"> </div>
     </div>
-    <div dx-text-box="textBox.simple"></div>
-    @*<div class="form">
-            <div class="dx-fieldset">
-                <div class="dx-field">
-                    <div class="dx-field-label">Megjegyzés</div>
-                    <div class="dx-field-value">
-                        <div dx-text-box="textBox.simple"></div>
+    <div>
+        @*<div class="label">Megjegyzés</div>*@
+        <div dx-text-box="textBox.simple"></div>
+     </div>
+        @*<div class="form">
+                <div class="dx-fieldset">
+                    <div class="dx-field">
+                        <div class="dx-field-label">Megjegyzés</div>
+                        <div class="dx-field-value">
+                            <div dx-text-box="textBox.simple"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>*@
+            </div>*@
 
 
     <div>
         <div class="egyeb" dx-button="{ stylingMode: 'contained',
-        text: 'dx - Névjegy',
-        width: 120,
-        height: 30,
-        onClick: Nevjegy
-                }">
+    text: 'dx - Névjegy',
+    width: 120,
+    height: 30,
+    onClick: Nevjegy
+            }">
         </div>
         <label for="Nevjegy"></label>
         <label for="Nevjegy"></label>
@@ -69,7 +72,7 @@
 
 
 @section JavaScript{
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.min.js"></script>
     <script src="~/Scripts/angular.min.js"></script>
     <script src="~/Scripts/angular-route.min.js"></script>
     <script src="~/Scripts/dx.all.js"></script>
@@ -110,6 +113,19 @@
     .egyeb {
         color: rgb(49, 46, 46);
         background-color: rgba(255, 222, 121, 0.96);
+    }
+
+    .keret {
+        border: 1px solid black;
+        background-color: rgb(255, 244, 244);
+        height: 20px;
+    }
+    .keretChk {
+        border: 1px solid black;
+        background-color: rgb(255, 244, 244);
+        color: #fff;
+        width: 20px; 
+        height: 20px;
     }
 
     .buttons-column > .column-header {
