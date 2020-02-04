@@ -1,0 +1,129 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>ÚJ ÜGYFÉL</h2>
+
+<div id="content" ng-controller="CustomerController">
+    <span ng-show="isViewLoading" class="viewLoading">
+        <img src="~/Content/images/ng-loader.gif" /> loading...
+    </span>
+    <div class="color-green">{{message}}</div>
+    <div>
+        <button ng-show="UjRogzVisible" ng-click="UjRogzit()" color="green">Új rögzítés</button>
+    </div>
+    <hr />
+    <form ng-submit="submitForm()" name="frmCustomer">
+        <div>
+            <label for="email">Ügyfél neve</label>
+            <input type="text" ng-model="cust.CustName" name="cname" placeholder="Írd be az ügyfél nevét" required ng-minlength="4" ng-maxlength="19" size="100" />
+            <span class="error" ng-show="(frmCustomer.$dirty) && UjRogzVisible==false && frmCustomer.cname.$error.required">Ügyfél név kötelező!</span>
+            <span class="error" ng-show="frmCustomer.$dirty && frmCustomer.cname.$error.minlength">Minimum hossz: 5</span>
+            <span class="error" ng-show="frmCustomer.$dirty && frmCustomer.cname.$error.maxlength">Maximum hossz: 20</span>
+        </div>
+        <div>
+            <label for="email">E-mail cím</label>
+            <input type="email" ng-model="cust.CustEmail" name="email" placeholder="Írd be az Email címet" required size="100" />
+            <span class="error" ng-show="(frmCustomer.$dirty) && UjRogzVisible==false && frmCustomer.email.$error.required">Email cím kötelező!</span>
+            <span class="error" ng-show="(frmCustomer.$dirty) && frmCustomer.$error.email">Érvénytelen Email cím!</span>
+        </div>
+
+        <div>
+            <input type="submit" value="Elküld" ng-disabled="myForm.$invalid" ng-hide="UjRogzVisible">
+        </div>
+
+    </form>
+
+
+    <div>
+        <div class="dx-field-label">Fontos ügyfél</div>
+        <div dx-check-box="checkBox.chkFontos"> </div>
+    </div>
+    <div dx-text-box="textBox.simple"></div>
+    @*<div class="form">
+            <div class="dx-fieldset">
+                <div class="dx-field">
+                    <div class="dx-field-label">Megjegyzés</div>
+                    <div class="dx-field-value">
+                        <div dx-text-box="textBox.simple"></div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+
+
+    <div>
+        <div class="egyeb" dx-button="{ stylingMode: 'contained',
+        text: 'dx - Névjegy',
+        width: 120,
+        height: 30,
+        onClick: Nevjegy
+                }">
+        </div>
+        <label for="Nevjegy"></label>
+        <label for="Nevjegy"></label>
+        <button class="egyeb" ng-click="Nevjegy()">Névjegy</button>
+    </div>
+</div>
+
+
+@section JavaScript{
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/angular-route.min.js"></script>
+    <script src="~/Scripts/dx.all.js"></script>
+    <script src="~/ControllersNg/CustomerController.js"></script>
+}
+
+<style>
+    #content label {
+        width: 150px;
+    }
+
+    #content input[type=submit] {
+        margin-left: 154px;
+        width: 120px;
+        padding: 5px 15px;
+        background: #ff6a00;
+        border: 0 none;
+        cursor: pointer;
+        color: #fff;
+    }
+
+    .error {
+        color: red;
+    }
+
+    .color-default {
+        color: #000;
+    }
+
+    .color-red {
+        color: red;
+    }
+
+    .color-green {
+        color: green;
+    }
+
+    .egyeb {
+        color: rgb(49, 46, 46);
+        background-color: rgba(255, 222, 121, 0.96);
+    }
+
+    .buttons-column > .column-header {
+        flex-grow: 0;
+        width: 150px;
+        height: 35px;
+        font-size: 130%;
+        opacity: 0.6;
+        text-align: left;
+        padding-left: 15px;
+    }
+
+    #content input.ng-dirty.ng-invalid {
+        border: 1px solid red;
+        background-color: rgb(255, 244, 244);
+    }
+</style>
