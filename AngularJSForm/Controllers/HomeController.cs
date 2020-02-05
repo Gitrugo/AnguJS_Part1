@@ -30,9 +30,10 @@ namespace AngularJSForm.Controllers
         modKozos.tbCust.Add(model);
        
         //var RedirectUrl = Url.Action("About", "Home", new { area = "" });
-        return Json(new { success = true, nid = nId.ToString() });
         //return Json(new { success = true, redirectUrl = RedirectUrl });
-      }
+        return Json(new { success = true, nid = nId.ToString() });
+
+     }
       return Json(new
       {
         success = false,
@@ -43,19 +44,17 @@ namespace AngularJSForm.Controllers
     // [FromForm]
 
     [HttpPost]
-    public JsonResult UjVevo( Customer model)
+    public JsonResult UjVevo( Vevo VevoRek)
     {
       if (ModelState.IsValid)
       {
         //Data save to database
-        long nId = 0;
-        if (modKozos.tbCust.Count > 0)
-          nId = modKozos.tbCust.Max(p => p.Id) + 1;
-        model.Id = nId;
-        modKozos.tbCust.Add(model);
+        //string cN = VevoRek.cNev;
+        //string cSzsz = VevoRek.nSzemSzin;
+        string cDt = VevoRek.dSzulDatum.ToShortDateString();
 
         //var RedirectUrl = Url.Action("About", "Home", new { area = "" });
-        return Json(new { success = true, nid = nId.ToString() });
+        return Json(new { success = true, Eredm = VevoRek, SzulDat = cDt });
         //return Json(new { success = true, redirectUrl = RedirectUrl });
       }
       return Json(new

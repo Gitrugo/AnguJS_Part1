@@ -26,7 +26,7 @@ controller('CustomerController', function ($scope, $http, $location, $window) {
         }
     };
 
-    var tbSzemSzin = ["Nincs","Kék", "Zöld", "Szürke", "Barna", "Egyéb"];
+    var tbSzemSzin = [{ szov: "Nincs", kulcs: 0 }, { szov: "Kék", kulcs: 1 }, { szov: "Zöld", kulcs: 2 }, { szov: "Szürke", kulcs: 3 }, { szov: "Barna", kulcs: 4 }, { szov: "Egyéb", kulcs: 5 }];
 
     //get called when user submits the form
     $scope.submitForm = function () {
@@ -110,7 +110,7 @@ controller('CustomerController', function ($scope, $http, $location, $window) {
                     message: "Név megadása kötelező."
                 }, {
                     type: "pattern",
-                    pattern: "^[a-zA-Z -]+$",
+                    pattern: "^[a-zA-Z -éáűőúöüóíÉÁŰŐÚÖÜÓÍ]+$",
                     message: "A név csak betűket tartalmazhat."
                 }]
             }, {
@@ -133,7 +133,9 @@ controller('CustomerController', function ($scope, $http, $location, $window) {
                 editorType: "dxRadioGroup",
                 editorOptions: {
                     items: tbSzemSzin,
-                    value: tbSzemSzin[0],
+                    displayExpr: "szov",
+                    valueExpr: "kulcs",
+                    value: 0,     // nincs
                     layout: "horizontal"
                 }
             }, {
@@ -141,12 +143,16 @@ controller('CustomerController', function ($scope, $http, $location, $window) {
                 label: { text: "Iskolai végzettség" },
                 editorType: "dxSelectBox",
                 editorOptions: { dataSource: [
-                    "8 általános",
-                    "Érettségi",
-                    "Főiskola",
-                    "Egyetem"
-                ],
-                placeholder: "Válaszd ki a megfelelő elemet..." }
+                    { szov: "8 általános", kulcs: 0 },
+                    { szov: "Érettségi", kulcs: 1 },
+                    { szov: "Főiskola", kulcs: 2 },
+                    { szov: "Egyetem", kulcs: 3 }
+                    ],
+                    displayExpr: "szov",
+                    valueExpr: "kulcs",
+                    value: 0,     // ÁLT isk
+                    placeholder: "Válaszd ki a megfelelő elemet..."
+                }
             }, {
                 dataField: "cMegjegyz",
                 label: { text: "Megjegyzés" },
@@ -167,22 +173,41 @@ controller('CustomerController', function ($scope, $http, $location, $window) {
         validationGroup: "ValUjVevo",
         useSubmitBehavior: true
     });
-    //{
-    //    itemType: "button",
-    //    buttonOptions: {
-    //        useSubmitBehavior: true
-    //    },
-        //onClick: function () {
-        //    DevExpress.ui.notify("Adatküldés folyamatban...");
-                
-        
-    $scope.submitDxForm = function () {
-        $scope.isViewLoading = true;
-        console.log('DxForm elküldve ezzel:', $scope.dxForm.formData);
-        $scope.isViewLoading = false;
-    }
+
+                 
+    //$scope.submitDxForm = function () {
+    //    $scope.isViewLoading = true;
+    //    console.log('DxForm elküldve ezzel:', $scope.dxForm.formData);  // nem működik
+
+    //    //$http service that send or receive data from the remote server
+    //    $http({
+    //        method: 'POST',
+    //        url: '/Home/UjVevo',
+    //        data: $scope.dxForm.formData
+    //    }).success(function (data, status, headers, config) {
+    //        $scope.errors = [];
+    //        if (data.success === true) {
+    //            $scope.UjRogzVisible = true;
+    //            //$scope.cust = {};
+    //            $scope.message = 'Ügyfél rögzítve!  ---> Id: ' + data.nid;
+    //            $scope.result = "color-green";
+    //            //$location.path(data.redirectUrl);
+    //            //$scope.showPopup(data.nid)
+    //            //$window.location.reload();
+    //        }
+    //        else {
+    //            $scope.errors = data.errors;
+    //        }
+    //    }).error(function (data, status, headers, config) {
+    //        $scope.errors = [];
+    //        $scope.message = 'Hiba történt az adat mentése közben!!';
+    //    });
+    //    $scope.isViewLoading = false;
+    //}
+
 
 })
+
 .config(function ($locationProvider) {
 
     //default = 'false'

@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+  ViewBag.Title = "Index";
 }
 
 <h2>ÚJ ÜGYFÉL</h2>
@@ -15,32 +15,36 @@
     </div>
     <hr />
     @*<form ng-submit="submitForm()" name="frmCustomer">
-        <div>
-            <label for="email">Ügyfél neve</label>
-            <input type="text" ng-model="cust.CustName" name="cname" placeholder="Írd be az ügyfél nevét" required ng-minlength="4" ng-maxlength="19" size="100" />
-            <span class="error" ng-show="(frmCustomer.$dirty) && UjRogzVisible==false && frmCustomer.cname.$error.required">Ügyfél név kötelező!</span>
-            <span class="error" ng-show="frmCustomer.$dirty && frmCustomer.cname.$error.minlength">Minimum hossz: 5</span>
-            <span class="error" ng-show="frmCustomer.$dirty && frmCustomer.cname.$error.maxlength">Maximum hossz: 20</span>
-        </div>
-        <div>
-            <label for="email">E-mail cím</label>
-            <input type="email" ng-model="cust.CustEmail" name="email" placeholder="Írd be az Email címet" required size="100" />
-            <span class="error" ng-show="(frmCustomer.$dirty) && UjRogzVisible==false && frmCustomer.email.$error.required">Email cím kötelező!</span>
-            <span class="error" ng-show="(frmCustomer.$dirty) && frmCustomer.$error.email">Érvénytelen Email cím!</span>
-        </div>
+            <div>
+                <label for="email">Ügyfél neve</label>
+                <input type="text" ng-model="cust.CustName" name="cname" placeholder="Írd be az ügyfél nevét" required ng-minlength="4" ng-maxlength="19" size="100" />
+                <span class="error" ng-show="(frmCustomer.$dirty) && UjRogzVisible==false && frmCustomer.cname.$error.required">Ügyfél név kötelező!</span>
+                <span class="error" ng-show="frmCustomer.$dirty && frmCustomer.cname.$error.minlength">Minimum hossz: 5</span>
+                <span class="error" ng-show="frmCustomer.$dirty && frmCustomer.cname.$error.maxlength">Maximum hossz: 20</span>
+            </div>
+            <div>
+                <label for="email">E-mail cím</label>
+                <input type="email" ng-model="cust.CustEmail" name="email" placeholder="Írd be az Email címet" required size="100" />
+                <span class="error" ng-show="(frmCustomer.$dirty) && UjRogzVisible==false && frmCustomer.email.$error.required">Email cím kötelező!</span>
+                <span class="error" ng-show="(frmCustomer.$dirty) && frmCustomer.$error.email">Érvénytelen Email cím!</span>
+            </div>
 
-        <div>
-            <input type="submit" value="Elküld" ng-disabled="myForm.$invalid" ng-hide="UjRogzVisible">
-        </div>
+            <div>
+                <input type="submit" value="Elküld" ng-disabled="myForm.$invalid" ng-hide="UjRogzVisible">
+            </div>
 
-    </form>*@
+        </form>*@
+
+    @*  <form ng-submit="submitDxForm()" name="dxForm">*@
 
     <form action="/Home/UjVevo" method="post">
         <div id="formContainer"></div>
-        <div id="validateSubmitButton"></div>
-   </form>
+        <div align="right">
+          <div  id="validateSubmitButton"></div>
+        </div>
+    </form>
 
-    @*<div>
+@*<div>
     <div class="dx-field-label">Fontos ügyfél</div>
     <div dx-check-box="checkBox.chkFontos"> </div>
     </div>
@@ -48,20 +52,20 @@
         <div dx-text-box="textBox.simple"></div>
     </div>*@
 
-    <hr />
+<hr />
 
-    <div>
-        <div class="egyeb" dx-button="{ stylingMode: 'contained',
+<div>
+    <div class="egyeb" dx-button="{ stylingMode: 'contained',
 text: 'dx - Névjegy',
 width: 120,
 height: 30,
 onClick: Nevjegy
         }">
-        </div>
-        <label for="Nevjegy"></label>
-        <label for="Nevjegy"></label>
-        <button class="egyeb" ng-click="Nevjegy()">Névjegy</button>
     </div>
+    <label for="Nevjegy"></label>
+    <label for="Nevjegy"></label>
+    <button class="egyeb" ng-click="Nevjegy()">Névjegy</button>
+</div>
 </div>
 
 
@@ -109,7 +113,7 @@ onClick: Nevjegy
         background-color: rgba(255, 222, 121, 0.96);
     }
 
- 
+
     .buttons-column > .column-header {
         flex-grow: 0;
         width: 150px;

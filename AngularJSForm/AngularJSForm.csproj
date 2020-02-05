@@ -197,6 +197,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>myModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Vevo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
