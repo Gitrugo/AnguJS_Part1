@@ -102,7 +102,7 @@ controller('CustomerController', function ($scope, $http, $location, $window) {
                 nEletkor: 0,
                 bTanulo: false,
                 nSzemSzin: 0,
-                cSzemSzinKod: 0,
+                cSzemSzinKod: "",
                 nIskVegz: 0,     
                 cMegjegyz: ""
             },
@@ -155,13 +155,12 @@ controller('CustomerController', function ($scope, $http, $location, $window) {
                         var newValue = e.value;
                         // Event handling commands go here
                         console.log('dxRadioGroup:', newValue);
-                        //$('#formContainer').dxForm('instance').updateData('cSzemSzinKod', 'Kakukk');
-                        $('#formContainer').dxForm('instance').getEditor('dataField').option('value', 'Kaukk!');
-                        //var editorInstance = formContainer.getEditor('cSzemSzinKod');
-                        //editorInstance.option('value', 'Kakukk');
+                        $('#formContainer').dxForm('instance').updateData('cSzemSzinKod', newValue);
+                        //$('#formContainer').dxForm('instance').getEditor('cSzemSzinKod').option('value', newValue);
                      }
                 }
             }, {
+                dataField: "cSzemSzinKod",
                 label: { text: "Szem szín kód" },
                 editorType: "dxTextBox",
                 editorOptions: {
