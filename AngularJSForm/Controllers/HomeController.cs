@@ -44,7 +44,7 @@ namespace AngularJSForm.Controllers
     // [FromForm]
 
     [HttpPost]
-    public JsonResult UjVevo( Vevo VevoRek)
+    public JsonResult UjVevo(Vevo VevoRek)
     {
       if (ModelState.IsValid)
       {

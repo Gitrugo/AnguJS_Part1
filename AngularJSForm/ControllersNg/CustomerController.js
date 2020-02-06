@@ -63,7 +63,10 @@ controller('CustomerController', function ($scope, $http, $location, $window) {
 
    $scope.showPopup = function (id) {
             window.alert("Ügyfél rögzítve! ---> Id: " + id);
-        }
+   }
+   $scope.showChkUzenet = function (ert) {
+       window.alert("Checkbox: " + ert);
+   }
 
    $scope.Nevjegy = function () {
         $scope.isViewLoading = true;
@@ -91,15 +94,16 @@ controller('CustomerController', function ($scope, $http, $location, $window) {
         DevExpress.ui.notify("Üzenet jött a liftből.");
     }
 
-    $(function () {
+    var frfr = $(function () {
         $("#formContainer").dxForm({
             formData: {
                 cNev: "",
                 dSzulDatum: new Date(0,0,1),    // 1900.01.01
                 nEletkor: 0,
                 bTanulo: false,
-                nSzemSzin: "",
-                nIskVegz: "",     
+                nSzemSzin: 0,
+                cSzemSzinKod: 0,
+                nIskVegz: 0,     
                 cMegjegyz: ""
             },
             items: [{
@@ -126,7 +130,16 @@ controller('CustomerController', function ($scope, $http, $location, $window) {
                 dataField: "bTanulo",
                 label: { text: "Tanuló" },
                 editorType: "dxCheckBox",
-                editorOptions: { value: false }
+                editorOptions: { value: false,
+                    onValueChanged: function (e) {
+                        var previousValue = e.previousValue;
+                        var newValue = e.value;
+                        // Event handling commands go here
+                        $scope.showChkUzenet(newValue)
+                        //console.log('Checkbox:', newValue);
+                    }
+                }
+
             }, {
                 dataField: "nSzemSzin",
                 label: { text: "Szeme színe" },
@@ -136,8 +149,26 @@ controller('CustomerController', function ($scope, $http, $location, $window) {
                     displayExpr: "szov",
                     valueExpr: "kulcs",
                     value: 0,     // nincs
-                    layout: "horizontal"
+                    layout: "horizontal",
+                    onValueChanged: function (e) {
+                        var previousValue = e.previousValue;
+                        var newValue = e.value;
+                        // Event handling commands go here
+                        console.log('dxRadioGroup:', newValue);
+                        //$('#formContainer').dxForm('instance').updateData('cSzemSzinKod', 'Kakukk');
+                        $('#formContainer').dxForm('instance').getEditor('dataField').option('value', 'Kaukk!');
+                        //var editorInstance = formContainer.getEditor('cSzemSzinKod');
+                        //editorInstance.option('value', 'Kakukk');
+                     }
                 }
+            }, {
+                label: { text: "Szem szín kód" },
+                editorType: "dxTextBox",
+                editorOptions: {
+                    value: "- nincs kiválasztva -",
+                    readOnly: true
+                }
+
             }, {
                 dataField: "nIskVegz",
                 label: { text: "Iskolai végzettség" },
@@ -163,6 +194,14 @@ controller('CustomerController', function ($scope, $http, $location, $window) {
             validationGroup: "ValUjVevo"
         });
     });
+
+    //$("#checkBoxContainer").dxCheckBox({
+    //    onValueChanged: function (e) {
+    //        var previousValue = e.previousValue;
+    //        var newValue = e.value;
+    //        // Event handling commands go here
+    //    }
+    //});
 
     $("#validateSubmitButton").dxButton({
         // ...
