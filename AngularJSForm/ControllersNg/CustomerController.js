@@ -99,7 +99,7 @@ controller('CustomerController', function ($scope, $http, $location, $window) {
                 }, {
                     type: "pattern",
                     pattern: "^[a-zA-Z -éáűőúöüóíÉÁŰŐÚÖÜÓÍ]+$",
-                    message: "A név csak betűket tartalmazhat."
+                    message: "A név csak betűket és kötőjelet tartalmazhat."
                 }]
             }, {
                 dataField: "dSzulDatum",
@@ -109,8 +109,12 @@ controller('CustomerController', function ($scope, $http, $location, $window) {
                 dataField: "nEletkor",
                 label: { text: "Életkor (év)" },
                 editorType: "dxNumberBox",
-                editorOptions: { value: 0 }
-            }, {
+                editorOptions: { value: null },
+                validationRules: [{
+                    type: "required",
+                    message: "Életkor megadása kötelező."
+                   }]
+                }, {
                 dataField: "bTanulo",
                 label: { text: "Tanuló" },
                 editorType: "dxCheckBox",
